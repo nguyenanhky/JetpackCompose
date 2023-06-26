@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import kynv1.it.fsoft.basecompose.ui.theme.BaseComposeTheme
@@ -17,27 +17,43 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BaseComposeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting("Android")
-                }
+                MainApp()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun MainApp() {
+    var currentScreen by remember {
+        mutableStateOf(Screen.VideoDetailScreen)
+    }
+
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
+    ) {
+
+        if (currentScreen == Screen.VideoDetailScreen) {
+            VideoDetailScreen() {
+                currentScreen = Screen.CategoryScreen
+            }
+        } else {
+            CategoryScreen()
+        }
+
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     BaseComposeTheme {
-        Greeting("Android")
+        MainApp()
     }
+}
+
+enum class Screen {
+    VideoDetailScreen,
+    CategoryScreen
 }
