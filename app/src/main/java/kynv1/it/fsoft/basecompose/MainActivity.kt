@@ -90,6 +90,7 @@ fun ImageFeature() {
 
 data class AppColor(val bodyTextColor: Color)
 
+//  create CompositionKey
 val LocalAppColor = compositionLocalOf {
     AppColor(Color.Black)
 
