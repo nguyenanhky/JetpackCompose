@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kynv1.it.fsoft.basecompose.ui.theme.BaseComposeTheme
+import kynv1.it.fsoft.basecompose.ui.theme.LocalAppColorWarning
 
 @Composable
 fun HomeScreen() {
@@ -23,18 +25,11 @@ fun HomeScreen() {
             CartItem(title = "Surface card")
         }
 
-        // surface: red
-        // onsurface: white
-
-        // text : black
-
-
         Surface(
-            color = MaterialTheme.colors.surface,
-
-            ) {
-
-            Text("Warning", )
+            color = BaseComposeTheme.appColorWarning.warning,
+            contentColor = BaseComposeTheme.appColorWarning.onWarning
+        ) {
+            Text(text = "Warning")
         }
     }
 }
