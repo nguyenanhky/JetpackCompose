@@ -20,7 +20,11 @@ import kynv1.it.fsoft.basecompose.ui.cartlog.category.CategoryScreen
 import kynv1.it.fsoft.basecompose.ui.cartlog.product.ProductDetailScreen
 import kynv1.it.fsoft.basecompose.ui.checkout.CheckoutScreen
 import kynv1.it.fsoft.basecompose.ui.checkout.CheckoutSuccessScreen
+import kynv1.it.fsoft.basecompose.ui.customer.Address
+import kynv1.it.fsoft.basecompose.ui.customer.AddressBookNavigation
+import kynv1.it.fsoft.basecompose.ui.customer.AddressBookScreen
 import kynv1.it.fsoft.basecompose.ui.customer.AddressDetailScreen
+import kynv1.it.fsoft.basecompose.ui.customer.AddressNavType
 import kynv1.it.fsoft.basecompose.ui.customer.MyAccountScreen
 import kynv1.it.fsoft.basecompose.ui.home.HomeScreen
 import kynv1.it.fsoft.basecompose.ui.theme.BaseComposeTheme
@@ -45,11 +49,30 @@ fun MainApp() {
                 HomeScreen(
                     openCategoryAction = { navController.navigate("category") },
                     openMyAccountScreen = { navController.navigate("MyAccount") },
-                    editCustomerInfo = {}
+                    editCustomerInfo = {},
+                    openAddressBook = {
+                        val address = Address(id = 1, street = "Tran Hung Dao", city = "Nam Dinh")
+                        navController.navigate(AddressBookNavigation.createRoute(addresses = address))
+                    }
                 )
 
             }
 
+            composable(
+                route = AddressBookNavigation.route,
+                arguments = listOf(
+                    navArgument(AddressBookNavigation.addressArg){
+                        nullable = true
+                        type = AddressNavType()
+                    }
+                )
+            ){
+                val address = AddressBookNavigation.getAddress(it)
+                AddressBookScreen(addresses = listOf(address)) {
+                    
+                }
+                
+            }
             composable("category") {
                 CategoryScreen(openProductDetail = { productId ->
                     navController.navigate(route = "productDetail/$productId")

@@ -11,7 +11,12 @@ import androidx.compose.ui.unit.dp
 
 
 @Composable
-fun HomeScreen(openCategoryAction: () -> Unit, openMyAccountScreen: () -> Unit,editCustomerInfo: ()->Unit) {
+fun HomeScreen(
+    openCategoryAction: () -> Unit,
+    openMyAccountScreen: () -> Unit,
+    editCustomerInfo: () -> Unit,
+    openAddressBook: () -> Unit,
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -34,12 +39,23 @@ fun HomeScreen(openCategoryAction: () -> Unit, openMyAccountScreen: () -> Unit,e
         }) {
             Text(text = "Edit customer information")
         }
+        Spacer(modifier = Modifier.height(24.dp))
+        Button(onClick = {
+            openAddressBook()
+        }) {
+            Text(text = "AddressBook")
+        }
     }
 }
+
 @Composable
 @Preview(name = "Home screen", showBackground = true)
-fun HomeScreenPreview(){
-    HomeScreen(openCategoryAction = { /*TODO*/ }, openMyAccountScreen = { /*TODO*/ }) {
+fun HomeScreenPreview() {
+    HomeScreen(
+        openCategoryAction = { /*TODO*/ },
+        openMyAccountScreen = { /*TODO*/ },
+        editCustomerInfo = {}
+    ) {
 
     }
 }
